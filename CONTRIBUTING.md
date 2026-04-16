@@ -1,134 +1,150 @@
-# Contributing to HexHub
+# Contributing to HexHub Data Repository
 
-Thank you for your interest in contributing to HexHub! This document provides guidelines and instructions for contributing.
+Thank you for contributing to HexHub! This guide will help you submit drivers, protocols, and tools.
 
-## 🌟 How Can I Contribute?
+## Quick Start
 
-### Reporting Bugs
-
-Before creating bug reports, please check existing issues as the issue might already exist.
-
-**When creating a bug report, include:**
-- A clear, descriptive title
-- Steps to reproduce the issue
-- Expected vs actual behavior
-- Your OS and environment details
-- Any relevant screenshots or logs
-
-### Suggesting Enhancements
-
-Enhancement suggestions are welcome! Please provide:
-- A clear description of the proposed feature
-- Why this feature would be useful
-- Any examples of how it should work
-
-### Adding New Drivers
-
-This is the most common contribution! Follow these steps:
-
-1. **Fork the repository**
-2. **Edit `data/drivers.json`**:
-   - Follow the schema in `data/drivers_schema.json`
-   - Include all required fields
-   - Provide accurate hardware IDs
-   - Test installation commands if possible
-
-3. **Run the README generator**:
+1. **Fork** the repository
+2. **Clone** your fork:
    ```bash
-   python scripts/generate_readme.py
+   git clone --single-branch --branch data https://github.com/YOUR_USERNAME/HexHub.git
+   cd HexHub
    ```
 
-4. **Verify your changes**:
-   ```bash
-   python -m json.tool data/drivers.json > /dev/null && echo "Valid JSON"
+3. **Add your file** to the appropriate directory:
+   ```
+   windows/drivers/     - Windows drivers
+   linux/drivers/       - Linux drivers
+   macos/drivers/       - macOS drivers
+   all-systems/drivers/ - Cross-platform drivers
+   
+   windows/protocols/   - Windows protocols
+   linux/protocols/     - Linux protocols
+   macos/protocols/     - macOS protocols
+   all-systems/protocols/ - Cross-platform protocols
+   
+   windows/tools/       - Windows tools
+   linux/tools/         - Linux tools
+   macos/tools/         - macOS tools
+   all-systems/tools/   - Cross-platform tools
    ```
 
-5. **Commit and create a Pull Request**
+4. **Name your file** following the convention:
+   ```
+   {vendor}_{product}_{version}.{ext}
+   ```
+   Examples:
+   - `realtek_rtl8821ce_v5.2.5.zip`
+   - `nvidia_driver_535.104.tar.gz`
+   - `wireshark_usbpcap_1.5.3.msi`
 
-### Improving Documentation
+5. **Commit and push**:
+   ```bash
+   git add windows/drivers/realtek_rtl8821ce_v5.2.5.zip
+   git commit -m "Add Realtek RTL8821CE driver v5.2.5 for Windows"
+   git push origin data
+   ```
 
-Documentation improvements are always welcome:
-- Fix typos
-- Clarify unclear sections
-- Add examples
-- Translate content (if applicable)
+6. **Create a Pull Request** on GitHub
 
-## 📋 Pull Request Guidelines
+## File Requirements
 
-### Before Submitting
+### ✅ Must Have
+- Safe, malware-free content
+- Clear naming convention
+- Documentation inside the archive (README.txt or similar)
+- Proper licensing (open-source or freely distributable)
 
-- [ ] Run `python scripts/generate_readme.py` to update generated content
-- [ ] Validate JSON files with `python -m json.tool <file>.json`
-- [ ] Test your changes locally
-- [ ] Update documentation if needed
-- [ ] Follow the code style used in the project
+### 📦 Supported Formats
+- `.zip` (preferred)
+- `.tar.gz` / `.tgz`
+- `.7z`
+- `.exe` (Windows only)
+- `.msi` (Windows only)
+- `.gz`, `.bz2`, `.xz`
 
-### PR Title Format
+### ⚠️ Restrictions
+- Maximum file size: 100MB per file
+- No proprietary binaries without distribution rights
+- No cracked/pirated software
+- No malicious content
 
-Use clear, descriptive titles:
-- ✅ `Add driver for Realtek RTL8822BE Wi-Fi adapter`
-- ✅ `Fix broken download link for NVIDIA drivers`
-- ❌ `Update file`
+## Archive Contents
 
-### PR Description Template
+Each archive should include:
 
-```markdown
-## Description
-Brief description of changes
-
-## Type of Change
-- [ ] New driver entry
-- [ ] Bug fix
-- [ ] Documentation update
-- [ ] Feature addition
-- [ ] Other (please describe)
-
-## Testing
-- [ ] JSON validated
-- [ ] README regenerated
-- [ ] Commands tested (if applicable)
-
-## Related Issues
-Closes #XXX (if applicable)
+```
+archive.zip
+├── README.txt          # Installation instructions
+├── LICENSE             # License file
+├── driver.sys          # Driver files
+└── setup.exe           # Installer (optional)
 ```
 
-## 💻 Development Setup
+### README.txt Template
 
-```bash
-# Clone your fork
-git clone https://github.com/YOUR_USERNAME/HexHub.git
-cd HexHub
+```
+=== [Product Name] ===
+Vendor: [Company Name]
+Version: [X.Y.Z]
+Date: [YYYY-MM-DD]
 
-# Create a branch
-git checkout -b feature/your-feature-name
+== System Requirements ==
+- OS: Windows 10/11, Linux kernel 5.x, etc.
+- Architecture: x64, arm64, etc.
 
-# Make your changes
-# ...
+== Installation ==
+1. Extract the archive
+2. Run setup.exe (Windows) or install.sh (Linux)
+3. Reboot if required
 
-# Validate and generate
-python -m json.tool data/drivers.json > /dev/null
-python scripts/generate_readme.py
+== Hardware Compatibility ==
+- Device Model A (ID: XXXX:YYYY)
+- Device Model B (ID: XXXX:ZZZZ)
 
-# Commit
-git commit -m "Your commit message"
-git push origin feature/your-feature-name
+== License ==
+[License information]
+
+== Support ==
+Website: https://...
+Issues: https://github.com/egoffn1/HexHub/issues
 ```
 
-## 📜 Code of Conduct
+## Pull Request Checklist
 
-Please read our [Code of Conduct](CODE_OF_CONDUCT.md) before contributing.
+Before submitting your PR:
 
-## 🏆 Recognition
+- [ ] File is in the correct directory
+- [ ] Filename follows convention: `vendor_product_version.ext`
+- [ ] Archive includes README with installation instructions
+- [ ] File is under 100MB
+- [ ] I have rights to distribute this file
+- [ ] No malware or suspicious content
+- [ ] Commit message is descriptive
 
-Contributors will be recognized in:
-- The README.md contributors section
-- GitHub Contributors graph
-- Release notes (for significant contributions)
+## Review Process
 
-## ❓ Questions?
+1. **Automated Checks**: GitHub Actions validates file structure and naming
+2. **Manual Review**: Maintainers check:
+   - File safety (virus scan)
+   - Licensing compliance
+   - Documentation quality
+   - Correct categorization
 
-Feel free to open an issue with the "Question" label if you have any questions about contributing!
+3. **Merge**: Approved PRs are merged to the `data` branch
 
----
+## Reporting Issues
 
-**Thank you for making HexHub better! 🎉**
+Found a problem with a file? Open an issue with:
+- File name and location
+- Problem description
+- Expected behavior
+- Screenshots/logs if applicable
+
+## Questions?
+
+- Check existing issues
+- Read the main README.md
+- Contact maintainers via GitHub Discussions
+
+Thank you for making HexHub better! 🎉

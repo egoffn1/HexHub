@@ -1,323 +1,274 @@
-# HexHub
+# HexHub 🧙‍♂️
 
-<div align="center">
-
-![HexHub Logo](https://img.shields.io/badge/HexHub-Hardware%20Spellbook-blue?style=for-the-badge&logo=github)
-
-### 🧙 The Cross-Platform Spellbook for Hardware
-
-**Centralized database of drivers, protocols, and diagnostic tools with ready-to-paste commands for Linux, Windows, and macOS.**
+> **The cross-platform spellbook for hardware**
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![GitHub stars](https://img.shields.io/github/stars/egoffn1/HexHub?style=social)](https://github.com/egoffn1/HexHub/stargazers)
-[![GitHub forks](https://img.shields.io/github/forks/egoffn1/HexHub?style=social)](https://github.com/egoffn1/HexHub/network/members)
+[![GitHub stars](https://img.shields.io/github/stars/egoffn1/HexHub)](https://github.com/egoffn1/HexHub/stargazers)
 [![GitHub issues](https://img.shields.io/github/issues/egoffn1/HexHub)](https://github.com/egoffn1/HexHub/issues)
+[![GitHub forks](https://img.shields.io/github/forks/egoffn1/HexHub)](https://github.com/egoffn1/HexHub/network/members)
+[![Data Branch](https://img.shields.io/badge/data%20branch-ready-green)](https://github.com/egoffn1/HexHub/tree/data)
 
-</div>
-
----
-
-## 📦 Data Branch
-
-**All data files are stored in the [`data`](https://github.com/egoffn1/HexHub/tree/data) branch!** This keeps the main branch clean and allows community contributions without affecting the core project structure.
-
-### How to Contribute
-
-1. **Fork** the repository
-2. **Checkout** the `data` branch: `git checkout data`
-3. **Add** your driver/protocol/tool to the appropriate JSON file
-4. **Submit** a Pull Request to the `data` branch
-
-👉 [View Data Files](https://github.com/egoffn1/HexHub/tree/data) | [Contribution Guide](CONTRIBUTING.md)
+Centralized database of drivers, protocols, and diagnostic tools with ready-to-paste commands and downloadable archives for Linux, Windows, macOS, and BSD.
 
 ---
 
-## 📖 About HexHub
+## 📖 Table of Contents
 
-HexHub is not just a database—it's an **interactive reference** for system administrators and developers. It provides structured information about hardware (drivers, protocols, utilities) and, most importantly, **ready-to-copy installation commands** grouped by operating system (Windows, Linux, macOS, BSD).
-
-### ✨ Features
-
-- 🚀 **One-Click Commands**: Copy-paste installation commands for any OS
-- 📊 **Structured Data**: JSON-based database easy to extend and automate
-- 🔍 **Hardware ID Search**: Find drivers by PCI, USB, and other hardware IDs
-- 🌐 **Cross-Platform**: Support for Windows, Linux (Debian/RHEL/Arch), and macOS
-- 🤖 **Auto-Generated Docs**: README updates automatically via CI/CD
-- 📦 **Extensible**: Easy to add new drivers, protocols, and tools
+- [About](#about)
+- [Quick Commands Sandbox](#-quick-commands-sandbox)
+- [Download Files](#-download-files)
+- [Structure](#structure)
+- [How to Contribute](#-how-to-contribute)
+- [Community Guidelines](#community-guidelines)
+- [License](#license)
 
 ---
 
-## 📦 Database Contents
+## About
 
-<!-- BEGIN_DRIVERS_TABLE -->
-| Name | Category | Vendor | Hardware IDs |
-|------|----------|--------|---------------|
-| Realtek RTL8821CE Wi-Fi Driver | Network | Realtek | `PCI\VEN_10EC&DEV_C821, PCI\VEN_10EC&DEV_C822` |
-| NVIDIA Proprietary GPU Driver | GPU | NVIDIA | `PCI\VEN_10DE&DEV_1B80, PCI\VEN_10DE&DEV_1B81, P...` |
-| USBPcap - USB Packet Capture Driver | Virtualization | Open Source | `USB\VID_0000&PID_0000` |
+HexHub is not just a database—it's an interactive handbook for system administrators and developers. It provides structured information about hardware (drivers, protocols, utilities) and, most importantly, **ready-to-copy installation commands** grouped by operating systems (Windows, Linux, macOS, BSD).
 
-<!-- END_DRIVERS_TABLE -->
+### Key Features
+
+- 📦 **Downloadable Archives**: Drivers, protocols, and tools packaged as `.zip`, `.tar.gz`, etc.
+- 🖥️ **OS-Specific**: Organized by Windows, Linux, macOS, and cross-platform
+- 🔍 **Searchable**: Easy to find what you need
+- 🤝 **Community-Driven**: Anyone can contribute
+- ✅ **Verified**: All submissions are reviewed for safety
 
 ---
 
 ## 🚀 Quick Commands Sandbox
 
-<!-- BEGIN_QUICK_COMMANDS -->
-### 🚀 Quick Commands Sandbox
+Select your OS and category to get started:
 
-> **Tip:** Select your OS and copy the command directly!
-
-#### GPU
-
-**NVIDIA Proprietary GPU Driver**
-
-🪟 **Windows:** ` winget install Nvidia.GeForceNow --source winget `
-
-🐧 **Debian/Ubuntu:** ` sudo ubuntu-drivers autoinstall || sudo apt install nvidia-driver-535 `
-
-📦 **Arch:** ` sudo pacman -S nvidia nvidia-utils nvidia-settings `
-
-🍎 **macOS:** ` echo 'NVIDIA drivers not supported on modern macOS (Metal API only)' `
-
----
-
-#### Network
-
-**Realtek RTL8821CE Wi-Fi Driver**
-
-🪟 **Windows:** ` winget install Realtek.RTL8821CE --source winget `
-
-🐧 **Debian/Ubuntu:** ` sudo add-apt-repository ppa:kelebek333/rtl8821ce && sudo apt update && sudo apt install rtl8821ce-dkms `
-
-📦 **Arch:** ` yay -S rtl8821ce-dkms-git `
-
----
-
-#### Virtualization
-
-**USBPcap - USB Packet Capture Driver**
-
-🪟 **Windows:** ` winget install DESKTOPNW.USBPcap --source winget `
-
-🐧 **Debian/Ubuntu:** ` sudo apt install wireshark usbmon && sudo modprobe usbmon `
-
-📦 **Arch:** ` sudo pacman -S wireshark-qt && sudo modprobe usbmon `
-
-🍎 **macOS:** ` brew install wireshark `
-
----
-
-
-<!-- END_QUICK_COMMANDS -->
-
----
-
-## 💻 Installation Commands Reference
-
-<!-- BEGIN_INSTALLATION_DETAILS -->
 <details>
-<summary><strong>🪟 Windows Installation Commands</strong></summary>
+<summary><strong>🪟 Windows</strong></summary>
 
-| Driver | Command | Download |
-|--------|---------|----------|
-| Realtek RTL8821CE Wi-Fi Driver | `winget install Realtek.RTL8821CE --source winget` | [Download](https://www.realtek.com/en/component/zoo/category/network-interface-controllers-10-100-1000m-pci-express) |
-| NVIDIA Proprietary GPU Driver | `winget install Nvidia.GeForceNow --source winget` | [Download](https://www.nvidia.com/Download/index.aspx) |
-| USBPcap - USB Packet Capture Driver | `winget install DESKTOPNW.USBPcap --source winget` | [Download](https://desowin.github.io/usbpcap/) |
+### Drivers
+```powershell
+# Example: Install Realtek WiFi driver via winget
+winget install Realtek.RTL8821CE
+```
+
+### Tools
+```powershell
+# Example: Install Wireshark
+winget install Wireshark.Wireshark
+```
+
+### Protocols
+```powershell
+# Example: Enable SMBv3
+Enable-WindowsOptionalFeature -Online -FeatureName SMBv3
+```
 
 </details>
 
 <details>
-<summary><strong>🐧 Linux Installation Commands</strong></summary>
+<summary><strong>🐧 Linux</strong></summary>
 
-### Realtek RTL8821CE Wi-Fi Driver
-
-**Debian/Ubuntu:**
+### Drivers
 ```bash
-sudo add-apt-repository ppa:kelebek333/rtl8821ce && sudo apt update && sudo apt install rtl8821ce-dkms
-```
+# Ubuntu/Debian
+sudo apt update && sudo apt install realtek-dkms
 
-**RHEL/CentOS/Fedora:**
-```bash
-sudo dnf install kernel-devel kernel-headers gcc make git && git clone https://github.com/tomaspinho/rtl8821ce.git && cd rtl8821ce && sudo ./dkms-install.sh
-```
+# RHEL/Fedora
+sudo dnf install kmod-rtl8821ce
 
-**Arch/Manjaro:**
-```bash
+# Arch Linux
 yay -S rtl8821ce-dkms-git
 ```
 
-**Generic:**
+### Tools
 ```bash
-git clone https://github.com/tomaspinho/rtl8821ce.git && cd rtl8821ce && sudo ./dkms-install.sh
+# Ubuntu/Debian
+sudo apt install wireshark
+
+# RHEL/Fedora
+sudo dnf install wireshark
+
+# Arch Linux
+sudo pacman -S wireshark-qt
 ```
 
-### NVIDIA Proprietary GPU Driver
-
-**Debian/Ubuntu:**
+### Protocols
 ```bash
-sudo ubuntu-drivers autoinstall || sudo apt install nvidia-driver-535
-```
-
-**RHEL/CentOS/Fedora:**
-```bash
-sudo dnf install epel-release && sudo dnf config-manager --add-repo=https://download.nvidia.com/XFree86/Linux-x86_64 && sudo dnf install nvidia-driver
-```
-
-**Arch/Manjaro:**
-```bash
-sudo pacman -S nvidia nvidia-utils nvidia-settings
-```
-
-**Generic:**
-```bash
-wget https://download.nvidia.com/XFree86/Linux-x86_64/535.104.05/NVIDIA-Linux-x86_64-535.104.05.run && chmod +x NVIDIA-Linux-x86_64-535.104.05.run && sudo ./NVIDIA-Linux-x86_64-535.104.05.run
-```
-
-### USBPcap - USB Packet Capture Driver
-
-**Debian/Ubuntu:**
-```bash
-sudo apt install wireshark usbmon && sudo modprobe usbmon
-```
-
-**RHEL/CentOS/Fedora:**
-```bash
-sudo dnf install wireshark && sudo modprobe usbmon
-```
-
-**Arch/Manjaro:**
-```bash
-sudo pacman -S wireshark-qt && sudo modprobe usbmon
-```
-
-**Generic:**
-```bash
-sudo modprobe usbmon && ls /sys/kernel/debug/usbmon
+# Enable IPv6
+sudo sysctl -w net.ipv6.conf.all.disable_ipv6=0
 ```
 
 </details>
 
 <details>
-<summary><strong>🍎 macOS Installation Commands</strong></summary>
+<summary><strong>🍎 macOS</strong></summary>
 
-| Driver | Homebrew | Download |
-|--------|----------|----------|
-| Realtek RTL8821CE Wi-Fi Driver | `echo 'Not available via Homebrew'` | [Download](https://github.com/christianrondeau/RTL8821CU-macOS-Driver) |
-| NVIDIA Proprietary GPU Driver | `echo 'NVIDIA drivers not supported on modern macOS (Metal API only)'` | [Download](https://www.nvidia.com/object/mac-driver-archive.html) |
-| USBPcap - USB Packet Capture Driver | `brew install wireshark` | [Download](https://github.com/drecc/USBBugle) |
+### Drivers
+```bash
+# Install via Homebrew
+brew install --cask realtek-usb-ethernet
+```
+
+### Tools
+```bash
+# Install Wireshark
+brew install --cask wireshark
+```
+
+### Protocols
+```bash
+# Enable IPv6
+networksetup -setv6automatic Ethernet
+```
 
 </details>
 
+<details>
+<summary><strong>🌐 All Systems (Cross-Platform)</strong></summary>
 
-<!-- END_INSTALLATION_DETAILS -->
+### Universal Tools
+```bash
+# Download and run cross-platform tools
+# See the all-systems/tools directory for archives
+```
+
+### Protocols
+```bash
+# Cross-platform protocol implementations
+# Check all-systems/protocols for documentation
+```
+
+</details>
 
 ---
 
-## 🗂️ Project Structure
+## 📦 Download Files
 
-```
-HexHub/
-├── README.md                 # This file (auto-generated sections)
-├── LICENSE                   # MIT License
-├── CONTRIBUTING.md           # Contribution guidelines
-├── CODE_OF_CONDUCT.md        # Code of conduct
-├── .gitignore                # Git ignore rules
-├── data/                     # Database files
-│   ├── drivers.json          # Driver entries
-│   ├── protocols.json        # Protocol specifications
-│   └── tools.json            # Diagnostic tools
-├── scripts/                  # Automation scripts
-│   └── generate_readme.py    # README generator
-├── docs/                     # GitHub Pages documentation
-└── .github/                  # GitHub templates & workflows
-    ├── ISSUE_TEMPLATE/       # Issue templates
-    ├── PULL_REQUEST_TEMPLATE.md
-    └── workflows/            # GitHub Actions CI/CD
-```
+All downloadable files (drivers, protocols, tools) are stored in the **`data` branch**.
 
----
+### Browse by OS
 
-## 🛠️ Usage
+| OS | Drivers | Protocols | Tools |
+|----|---------|-----------|-------|
+| 🪟 Windows | [`windows/drivers/`](https://github.com/egoffn1/HexHub/tree/data/windows/drivers) | [`windows/protocols/`](https://github.com/egoffn1/HexHub/tree/data/windows/protocols) | [`windows/tools/`](https://github.com/egoffn1/HexHub/tree/data/windows/tools) |
+| 🐧 Linux | [`linux/drivers/`](https://github.com/egoffn1/HexHub/tree/data/linux/drivers) | [`linux/protocols/`](https://github.com/egoffn1/HexHub/tree/data/linux/protocols) | [`linux/tools/`](https://github.com/egoffn1/HexHub/tree/data/linux/tools) |
+| 🍎 macOS | [`macos/drivers/`](https://github.com/egoffn1/HexHub/tree/data/macos/drivers) | [`macos/protocols/`](https://github.com/egoffn1/HexHub/tree/data/macos/protocols) | [`macos/tools/`](https://github.com/egoffn1/HexHub/tree/data/macos/tools) |
+| 🌐 All Systems | [`all-systems/drivers/`](https://github.com/egoffn1/HexHub/tree/data/all-systems/drivers) | [`all-systems/protocols/`](https://github.com/egoffn1/HexHub/tree/data/all-systems/protocols) | [`all-systems/tools/`](https://github.com/egoffn1/HexHub/tree/data/all-systems/tools) |
 
-### For End Users
-
-1. Browse the [Quick Commands Sandbox](#-quick-commands-sandbox) section above
-2. Find your OS and hardware category
-3. Copy the command and paste it into your terminal
-
-### For Developers
+### Download a Specific File
 
 ```bash
-# Clone the repository
-git clone https://github.com/egoffn1/HexHub.git
+# Clone only the data branch
+git clone --no-checkout https://github.com/egoffn1/HexHub.git
 cd HexHub
+git sparse-checkout init --cone
+git sparse-checkout set data/windows/drivers
+git checkout data
+```
 
-# Run the README generator
-python scripts/generate_readme.py
+Or browse directly on GitHub and click to download!
 
-# Validate JSON data
-python -m json.tool data/drivers.json > /dev/null && echo "Valid JSON"
+---
+
+## Structure
+
+### Main Branch (`main`)
+Documentation, contribution guides, and project metadata.
+
+### Data Branch (`data`)
+All downloadable files organized by OS and category:
+
+```
+data/
+├── windows/
+│   ├── drivers/      # .zip, .exe, .msi archives
+│   ├── protocols/    # Protocol implementations
+│   └── tools/        # Utility tools
+├── linux/
+│   ├── drivers/
+│   ├── protocols/
+│   └── tools/
+├── macos/
+│   ├── drivers/
+│   ├── protocols/
+│   └── tools/
+└── all-systems/
+    ├── drivers/
+    ├── protocols/
+    └── tools/
 ```
 
 ---
 
-## 🤝 Contributing
+## 🤝 How to Contribute
 
-We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) for details.
+We welcome contributions! Here's how you can help:
 
-### How to Add a New Driver
+### Adding a New File
 
-1. Fork the repository
-2. Edit `data/drivers.json` following the schema in `data/drivers_schema.json`
-3. Run `python scripts/generate_readme.py` to update the README
-4. Commit and create a Pull Request
+1. **Fork** the repository
+2. **Clone** the data branch:
+   ```bash
+   git clone --single-branch --branch data https://github.com/YOUR_USERNAME/HexHub.git
+   ```
+3. **Add your file** to the appropriate directory
+4. **Name it properly**: `vendor_product_version.ext`
+5. **Submit a Pull Request**
 
-**Example entry:**
-```json
-{
-  "name": "Your Driver Name",
-  "description": "Brief description",
-  "category": "Network",
-  "vendor": "Vendor Name",
-  "hardware_ids": ["PCI\\VEN_XXXX&DEV_XXXX"],
-  "installation": {
-    "windows": {
-      "command": "winget install ...",
-      "url": "https://..."
-    },
-    "linux": {
-      "debian": "sudo apt install ...",
-      "rhel": "sudo dnf install ...",
-      "arch": "sudo pacman -S ..."
-    },
-    "macos": {
-      "brew": "brew install ...",
-      "url": "https://..."
-    }
-  }
-}
+### File Requirements
+
+- ✅ Safe and malware-free
+- ✅ Clear naming convention
+- ✅ Documentation included
+- ✅ Under 100MB
+- ✅ Proper licensing
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for detailed instructions.
+
+### Report Issues
+
+Found a problem? [Open an issue](https://github.com/egoffn1/HexHub/issues)!
+
+---
+
+## Community Guidelines
+
+Please read our [Code of Conduct](CODE_OF_CONDUCT.md) to keep our community welcoming and inclusive.
+
+---
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
 ```
+Copyright (c) 2026 HexHub Contributors
 
----
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
 
-## 📄 License
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
 
-This project is licensed under the [MIT License](LICENSE).
-
----
-
-## 🔗 Related Projects
-
-- [Linux Hardware Database](https://github.com/linuxhw)
-- [PCI ID Repository](http://pci-ids.ucw.cz/)
-- [USB ID Repository](http://www.linux-usb.org/usb.ids)
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+```
 
 ---
 
 <div align="center">
 
-**Made with ❤️ by the HexHub Contributors**
+**Made with ❤️ by the HexHub Community**
 
-[Report a Bug](https://github.com/egoffn1/HexHub/issues) · [Request a Feature](https://github.com/egoffn1/HexHub/issues) · [View Discussions](https://github.com/egoffn1/HexHub/discussions)
+[Report Issue](https://github.com/egoffn1/HexHub/issues) • [Request Feature](https://github.com/egoffn1/HexHub/issues) • [Discussions](https://github.com/egoffn1/HexHub/discussions)
 
 </div>
