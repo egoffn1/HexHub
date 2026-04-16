@@ -1,0 +1,130 @@
+---
+name: 📦 Add New Driver/Protocol/Tool
+description: Submit a new file to the HexHub database
+title: "[NEW] <vendor>_<product>_<version>"
+labels: ["enhancement", "new-submission"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for contributing to HexHub! Please fill out the details below.
+        
+  - type: dropdown
+    id: category
+    attributes:
+      label: Category
+      description: What type of file are you submitting?
+      options:
+        - Driver
+        - Protocol
+        - Tool
+    validations:
+      required: true
+
+  - type: dropdown
+    id: os_target
+    attributes:
+      label: Target Operating System
+      description: Which OS is this file for?
+      options:
+        - Windows
+        - Linux
+        - macOS
+        - All Systems (Cross-platform)
+    validations:
+      required: true
+
+  - type: input
+    id: vendor
+    attributes:
+      label: Vendor/Manufacturer
+      description: Name of the vendor (e.g., Realtek, NVIDIA, Intel)
+      placeholder: "e.g., Realtek"
+    validations:
+      required: true
+
+  - type: input
+    id: product
+    attributes:
+      label: Product Name
+      description: Product or device name
+      placeholder: "e.g., RTL8821CE WiFi Adapter"
+    validations:
+      required: true
+
+  - type: input
+    id: version
+    attributes:
+      label: Version
+      description: Version number of the driver/tool
+      placeholder: "e.g., 5.2.5"
+    validations:
+      required: true
+
+  - type: textarea
+    id: hardware_ids
+    attributes:
+      label: Hardware IDs (for drivers)
+      description: List compatible hardware IDs (PCI IDs, USB IDs, etc.)
+      placeholder: |
+        PCI\VEN_10EC&DEV_8821
+        USB\VID_0BDA&PID_8821
+    validations:
+      required: false
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      description: Brief description of what this file does
+      placeholder: "This driver enables..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: installation
+    attributes:
+      label: Installation Instructions
+      description: Step-by-step installation guide
+      placeholder: |
+        1. Extract the archive
+        2. Run setup.exe
+        3. Reboot your system
+    validations:
+      required: true
+
+  - type: dropdown
+    id: file_format
+    attributes:
+      label: File Format
+      options:
+        - .zip
+        - .tar.gz
+        - .7z
+        - .exe
+        - .msi
+        - Other (specify in description)
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Submission Checklist
+      options:
+        - label: I confirm this file is safe and contains no malware
+          required: true
+        - label: I have the right to distribute this file (open-source or freely distributable)
+          required: true
+        - label: I have included documentation inside the archive
+          required: false
+        - label: File size is under 100MB
+          required: true
+
+  - type: markdown
+    attributes:
+      value: |
+        **Important:** 
+        - Attach your file by committing it to your fork and mentioning the path in this issue
+        - Or create a PR directly with the file in the correct directory
+        - Files will be reviewed before merging

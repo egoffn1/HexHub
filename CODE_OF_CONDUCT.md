@@ -60,7 +60,8 @@ representative at an online or offline event.
 
 Instances of abusive, harassing, or otherwise unacceptable behavior may be
 reported to the community leaders responsible for enforcement at
-[INSERT CONTACT METHOD]. All complaints will be reviewed and investigated promptly and fairly.
+[GitHub Issues](https://github.com/egoffn1/HexHub/issues).
+All complaints will be reviewed and investigated promptly and fairly.
 
 All community leaders are obligated to respect the privacy and security of the
 reporter of any incident.
@@ -99,8 +100,8 @@ sustained inappropriate behavior.
 **Consequence**: A temporary ban from any sort of interaction or public
 communication with the community for a specified period of time. No public or
 private interaction with the people involved, including unsolicited interaction
-with those enforcing the Code of Conduct, during this period is allowed. Violating
-these terms may lead to a permanent ban.
+with those enforcing the Code of Conduct, during this period is allowed.
+Violating these terms may lead to a permanent ban.
 
 ### 4. Permanent Ban
 

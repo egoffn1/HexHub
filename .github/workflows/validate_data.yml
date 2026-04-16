@@ -1,0 +1,97 @@
+name: Validate Data Files
+
+on:
+  pull_request:
+    branches: [ data ]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+    
+    - name: Check file extensions
+      run: |
+        echo "Checking file extensions..."
+        find . -type f ! -name "*.zip" ! -name "*.tar.gz" ! -name "*.tgz" ! -name "*.7z" ! -name "*.rar" ! -name "*.gz" ! -name "*.bz2" ! -name "*.xz" ! -name ".gitkeep" ! -name "README.md" | grep -v ".github/" || true
+    
+    - name: Scan for malicious patterns in filenames
+      run: |
+        echo "Scanning filenames for suspicious patterns..."
+        if find . -type f -iname "*virus*" -o -iname "*malware*" -o -iname "*hack*" -o -iname "*crack*" -o -iname "*keygen*" | grep -v ".git" | grep -q .; then
+          echo "❌ Suspicious filenames detected!"
+          exit 1
+        fi
+        echo "✅ No suspicious filenames found"
+    
+    - name: Check file naming convention
+      run: |
+        echo "Validating file naming conventions..."
+        errors=0
+        for file in $(find windows linux macos all-systems -type f -name "*.zip" -o -name "*.tar.gz" -o -name "*.tgz" -o -name "*.7z" -o -name "*.exe" -o -name "*.msi" 2>/dev/null); do
+          filename=$(basename "$file")
+          if [[ ! "$filename" =~ ^[a-zA-Z0-9_-]+_[a-zA-Z0-9_-]+_v?[0-9.]+ ]]; then
+            echo "⚠️  Warning: $filename may not follow naming convention (vendor_product_version)"
+          fi
+        done
+        echo "✅ File naming check complete"
+    
+    - name: Verify directory structure
+      run: |
+        echo "Verifying directory structure..."
+        required_dirs=("windows/drivers" "windows/protocols" "windows/tools" 
+                       "linux/drivers" "linux/protocols" "linux/tools"
+                       "macos/drivers" "macos/protocols" "macos/tools"
+                       "all-systems/drivers" "all-systems/protocols" "all-systems/tools")
+        
+        for dir in "${required_dirs[@]}"; do
+          if [ ! -d "$dir" ]; then
+            echo "❌ Missing required directory: $dir"
+            exit 1
+          fi
+        done
+        echo "✅ Directory structure is valid"
+    
+    - name: Generate file listing
+      run: |
+        echo "Generating file inventory..."
+        echo "# HexHub Data Inventory" > INVENTORY.md
+        echo "" >> INVENTORY.md
+        echo "Generated on: $(date -u)" >> INVENTORY.md
+        echo "" >> INVENTORY.md
+        
+        for os in windows linux macos all-systems; do
+          echo "## ${OS^}" >> INVENTORY.md
+          echo "" >> INVENTORY.md
+          
+          for category in drivers protocols tools; do
+            count=$(find "$os/$category" -type f ! -name ".gitkeep" 2>/dev/null | wc -l)
+            if [ $count -gt 0 ]; then
+              echo "### $category ($count files)" >> INVENTORY.md
+              echo "" >> INVENTORY.md
+              find "$os/$category" -type f ! -name ".gitkeep" -exec basename {} \; 2>/dev/null | sort >> INVENTORY.md
+              echo "" >> INVENTORY.md
+            fi
+          done
+        done
+        
+        cat INVENTORY.md
+    
+    - name: Commit inventory
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        if [ -f INVENTORY.md ]; then
+          git add INVENTORY.md || true
+          git commit -m "Update file inventory [skip ci]" || true
+        fi
+    
+    - name: Upload inventory artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: inventory
+        path: INVENTORY.md
+        retention-days: 30
