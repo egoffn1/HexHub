@@ -1,0 +1,103 @@
+name: Validate Data and Update README
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  validate-json:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.x'
+        
+    - name: Validate drivers.json
+      run: |
+        python -m json.tool data/drivers.json > /dev/null && echo "✅ drivers.json is valid" || (echo "❌ drivers.json is invalid" && exit 1)
+        
+    - name: Validate protocols.json
+      run: |
+        python -m json.tool data/protocols.json > /dev/null && echo "✅ protocols.json is valid" || (echo "❌ protocols.json is invalid" && exit 1)
+        
+    - name: Validate tools.json
+      run: |
+        python -m json.tool data/tools.json > /dev/null && echo "✅ tools.json is valid" || (echo "❌ tools.json is invalid" && exit 1)
+        
+    - name: Install jsonschema (optional validation)
+      run: |
+        pip install jsonschema
+        
+    - name: Validate against schema
+      run: |
+        python -c "
+import json
+from jsonschema import ValidationError
+
+try:
+    from jsonschema import validate
+except ImportError:
+    print('⚠️  jsonschema not installed, skipping schema validation')
+    exit(0)
+
+with open('data/drivers_schema.json') as f:
+    schema = json.load(f)
+    
+with open('data/drivers.json') as f:
+    data = json.load(f)
+    
+try:
+    validate(instance=data, schema=schema)
+    print('✅ drivers.json validates against schema')
+except ValidationError as e:
+    print(f'❌ Schema validation error: {e.message}')
+    exit(1)
+"
+
+  check-readme-updated:
+    runs-on: ubuntu-latest
+    needs: validate-json
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.x'
+        
+    - name: Generate README from current data
+      run: |
+        python scripts/generate_readme.py
+        
+    - name: Check if README was changed
+      run: |
+        git diff --exit-code README.md || (echo "❌ README.md is not up to date! Please run 'python scripts/generate_readme.py' and commit the changes." && exit 1)
+        echo "✅ README.md is up to date"
+
+  lint-scripts:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.x'
+        
+    - name: Install flake8
+      run: pip install flake8
+      
+    - name: Lint Python scripts
+      run: |
+        flake8 scripts/ --max-line-length=120 --ignore=E501,W503 || echo "⚠️  Some linting warnings found (non-blocking)"

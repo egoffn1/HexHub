@@ -1,0 +1,25 @@
+{
+  "protocols": [
+    {
+      "name": "NVMe",
+      "description": "Non-Volatile Memory Express - High-performance storage protocol for PCIe SSDs",
+      "category": "Storage",
+      "specification_url": "https://nvmexpress.org/specifications/",
+      "common_tools": ["nvme-cli", "smartmontools"]
+    },
+    {
+      "name": "USB 3.2",
+      "description": "Universal Serial Bus 3.2 Gen 2x2 - 20 Gbps data transfer protocol",
+      "category": "Input",
+      "specification_url": "https://www.usb.org/usb-32",
+      "common_tools": ["lsusb", "usbview"]
+    },
+    {
+      "name": "PCIe 4.0",
+      "description": "Peripheral Component Interconnect Express 4.0 - 16 GT/s per lane",
+      "category": "Chipset",
+      "specification_url": "https://pcisig.com/pci-express-base-specification-revision-40",
+      "common_tools": ["lspci", "pciutils"]
+    }
+  ]
+}

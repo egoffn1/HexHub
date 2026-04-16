@@ -1,0 +1,92 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "HexHub Drivers Database",
+  "description": "Schema for hardware driver entries in HexHub",
+  "type": "object",
+  "properties": {
+    "drivers": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name", "description", "category", "vendor", "hardware_ids", "installation"],
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Name of the driver"
+          },
+          "description": {
+            "type": "string",
+            "description": "Brief description of the driver"
+          },
+          "category": {
+            "type": "string",
+            "enum": ["GPU", "Network", "Audio", "Storage", "Chipset", "Input", "Printer", "Virtualization", "Other"]
+          },
+          "vendor": {
+            "type": "string",
+            "description": "Hardware vendor name"
+          },
+          "hardware_ids": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Hardware IDs (PCI, USB, etc.)"
+          },
+          "installation": {
+            "type": "object",
+            "properties": {
+              "windows": {
+                "type": "object",
+                "properties": {
+                  "command": {
+                    "type": "string",
+                    "description": "Installation command for Windows (e.g., winget, choco)"
+                  },
+                  "url": {
+                    "type": "string",
+                    "description": "Direct link to driver download (.inf, .exe)"
+                  }
+                }
+              },
+              "linux": {
+                "type": "object",
+                "properties": {
+                  "debian": {
+                    "type": "string",
+                    "description": "Installation command for Debian/Ubuntu-based systems"
+                  },
+                  "rhel": {
+                    "type": "string",
+                    "description": "Installation command for RHEL/CentOS/Fedora"
+                  },
+                  "arch": {
+                    "type": "string",
+                    "description": "Installation command for Arch Linux/Manjaro"
+                  },
+                  "generic": {
+                    "type": "string",
+                    "description": "Generic installation (source build, script)"
+                  }
+                }
+              },
+              "macos": {
+                "type": "object",
+                "properties": {
+                  "brew": {
+                    "type": "string",
+                    "description": "Homebrew installation command"
+                  },
+                  "url": {
+                    "type": "string",
+                    "description": "Direct link to macOS driver download"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
