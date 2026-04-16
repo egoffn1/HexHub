@@ -12,9 +12,23 @@
 [![GitHub stars](https://img.shields.io/github/stars/egoffn1/HexHub?style=social)](https://github.com/egoffn1/HexHub/stargazers)
 [![GitHub forks](https://img.shields.io/github/forks/egoffn1/HexHub?style=social)](https://github.com/egoffn1/HexHub/network/members)
 [![GitHub issues](https://img.shields.io/github/issues/egoffn1/HexHub)](https://github.com/egoffn1/HexHub/issues)
-[![CI/CD Status](https://github.com/egoffn1/HexHub/actions/workflows/validate_data.yml/badge.svg)](https://github.com/egoffn1/HexHub/actions)
 
 </div>
+
+---
+
+## 📦 Data Branch
+
+**All data files are stored in the [`data`](https://github.com/egoffn1/HexHub/tree/data) branch!** This keeps the main branch clean and allows community contributions without affecting the core project structure.
+
+### How to Contribute
+
+1. **Fork** the repository
+2. **Checkout** the `data` branch: `git checkout data`
+3. **Add** your driver/protocol/tool to the appropriate JSON file
+4. **Submit** a Pull Request to the `data` branch
+
+👉 [View Data Files](https://github.com/egoffn1/HexHub/tree/data) | [Contribution Guide](CONTRIBUTING.md)
 
 ---
 
