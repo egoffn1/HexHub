@@ -1,0 +1,7 @@
+File: vosk-model-small-ru-0.22.zip
+Total Size: 46236750 bytes
+Parts: 23
+
+How to reassemble:
+Linux/Mac: cat all/vosk-model-small-ru-0.22.zip.part.* > vosk-model-small-ru-0.22.zip
+Windows (PowerShell): Get-Content all\vosk-model-small-ru-0.22.zip.part.* -Encoding Byte -OutFile vosk-model-small-ru-0.22.zip
